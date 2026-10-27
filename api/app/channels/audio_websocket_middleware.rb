@@ -338,7 +338,6 @@ class AudioWebSocketMiddleware
           state.gemini_client.trigger_opening
         else
           state.model_speaking = false
-          send_json(browser_ws, type: 'speaker_changed', speaker: 'candidate')
         end
         send_json(browser_ws, type: 'session_started', session_id: session.id)
       end
