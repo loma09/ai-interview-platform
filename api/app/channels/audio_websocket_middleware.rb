@@ -336,6 +336,9 @@ class AudioWebSocketMiddleware
           state.model_speaking = true
           send_json(browser_ws, type: 'speaker_changed', speaker: 'ai')
           state.gemini_client.trigger_opening
+        else
+          state.model_speaking = false
+          send_json(browser_ws, type: 'speaker_changed', speaker: 'candidate')
         end
         send_json(browser_ws, type: 'session_started', session_id: session.id)
       end
@@ -472,8 +475,8 @@ class AudioWebSocketMiddleware
       return
     end
 
-    # If candidate may still be speaking (silence pump not active), defer until next model turn.
-    if state.gemini_client&.connected && !state.gemini_client&.silence_pumping?
+    # If candidate may still be speaking (not waiting for a response), defer until next model turn.
+    if state.gemini_client&.connected && !state.gemini_client&.waiting_for_response?
       Rails.logger.info("[AudioWS] Proactive reconnect deferred — candidate may be speaking (session #{state.session.id})")
       state.reconnect_after_turn = true
       return
