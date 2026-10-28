@@ -16,7 +16,7 @@ Produk ini membantu assessor mengumpulkan dan meninjau bukti kemampuan kandidat 
 
 Eksplorasi menemukan input kandidat yang tidak muncul, AI diam, dan reload yang berujung pesan sukses meskipun sesi berakhir karena error. Saya memilih memperbaiki jalur audio pada frontend dan backend, kemudian memperluas scope ke resume dan status akhir setelah pengujian manual membuktikan kelemahannya. Pemulihan integrasi portfolio dilakukan agar alur bisa diperiksa sampai hasil, fit/gap, dan ekspor.
 
-Verifikasi terakhir yang diarsipkan menghasilkan **26 tes frontend lulus dan 18 contoh backend tanpa kegagalan**. Tes browser sintetis dan build juga lulus. Pengguna berhasil melakukan percakapan beberapa giliran, memperoleh portfolio/fit-gap/ekspor pada sesi 18, dan akhirnya melanjutkan sesi 23 setelah sempat macet. Pengujian itu belum membuktikan setiap reload pulih otomatis, ketahanan 45 menit, atau akurasi penilaian.
+Verifikasi terakhir yang diarsipkan menghasilkan **31 tes frontend lulus; backend terakhir 18 contoh tanpa kegagalan**. Tes browser sintetis dan build juga lulus. Pengguna berhasil melakukan percakapan beberapa giliran, memperoleh portfolio/fit-gap/ekspor pada sesi 18, dan akhirnya melanjutkan sesi 23 setelah sempat macet. Pengujian itu belum membuktikan setiap reload pulih otomatis, ketahanan 45 menit, atau akurasi penilaian.
 
 **Keputusan produk:** perubahan layak dijelaskan sebagai perbaikan fullstack yang terukur, dengan keterbatasan terbuka. Bukti yang tersedia belum cukup untuk merekomendasikan platform ini sebagai dasar keputusan hiring tanpa review manusia dan pekerjaan lanjutan.
 
@@ -95,9 +95,10 @@ Saya memisahkan bug implementasi, konfigurasi/integrasi, gap produk, dan observa
 | F06 | Undangan membuka origin API yang salah | P1 saat terjadi | Konfigurasi lokal dipulihkan |
 | F09/F11 | Evidence kosong menjadi L1, lalu dihitung sebagai gap | P1 | Terbuka; satu rantai masalah, bukan dua akar independen |
 | F08 | Token invite terlihat pada log development | P2 terbatas | Terbuka; cakupan production belum diaudit |
-| F02 | Retry hardware tertahan Checking | P2 | Direproduksi ulang; Allow + reload menjadi workaround |
+| F02 | Retry hardware tertahan Checking | P2 | Diperbaiki E12; 5 regression tests dan built-UI Retry fixture E13 lulus; perangkat nyata belum diuji ulang |
 | F03 | Status akhir sesi dan kesiapan portfolio kurang jelas | P2 | Terbuka pada workflow assessor |
 | F05 | Internet check kurang menjelaskan batas dan metode | P2 | Terbuka; localhost bukan bukti internet baik |
+| F13 | Layout mobile/teks panjang membuat kontrol keluar viewport | P2 | Diperbaiki E13: 8/16 gagal sebelum -> 16/16 lulus sesudah pada viewport Edge |
 | F10 | Target Required kosong pada tabel fit/gap web | P2 | Terbuka; API mengirim expected_level, UI membaca required_level |
 | F12 | Complete masih membawa error percobaan lama di JSON | P2 | Terbuka; metadata error aktif/riwayat belum konsisten |
 
@@ -138,7 +139,7 @@ Pada browser detach, koneksi lama dilepas agar tidak punya timer yang mengakhiri
 | Portfolio, fit/gap, PDF dan JSON memuat hasil skenario sama | Lulus manual sesi 18; kualitas rating/metadata masih ada temuan |
 | Tes menangkap fault disengaja dan kembali lulus setelah pemulihan | Lulus lokal dengan tiga commit |
 
-Kriteria rinci AC01-AC14 dan batas V01-V07 ada di `assessment/scope-final.md`. Tabel ini merangkum status, bukan menambah bukti. Sebagian rationale/kriteria dirapikan setelah investigasi; laporan tidak mengklaim seluruh dokumen keputusan sudah ditulis sebelum perubahan pertama.
+Kriteria rinci AC01-AC16 dan batas V01-V07 ada di `assessment/scope-final.md`. Tabel ini merangkum status, bukan menambah bukti. Sebagian rationale/kriteria dirapikan setelah investigasi; laporan tidak mengklaim seluruh dokumen keputusan sudah ditulis sebelum perubahan pertama.
 
 ## Step 5 - Implementasi, pengujian, dan hasil
 
@@ -159,7 +160,7 @@ Tidak ada migrasi database. Endpoint authorization dan tenant policy tidak dinya
 
 | Area | Bukti sebelum perbaikan | Hasil terbaru |
 | --- | --- | --- |
-| Frontend reload/outcome | 9 gagal, 15 lulus pada suite 24 tes | Suite berkembang menjadi 26 tes, seluruhnya lulus |
+| Frontend reload/outcome | 9 gagal, 15 lulus pada suite 24 tes | Suite berkembang menjadi 31 tes, seluruhnya lulus |
 | Backend lifecycle/API | 4 gagal, 9 lulus pada suite 13 contoh | Suite berkembang menjadi 18 contoh, 0 gagal |
 | Checkpoint non-resumable | 1 gagal dari 15 contoh pada tahap tambahan | Lulus dalam suite final |
 | Retry akhir sesi setelah unmount | 1 gagal, 24 lulus | Lulus dalam suite final |
@@ -169,9 +170,17 @@ Tidak ada migrasi database. Endpoint authorization dan tenant policy tidak dinya
 
 Jumlah suite antartahap tidak dijumlahkan atau dianggap baseline yang identik. Unit tests memakai transport/perangkat sintetis; browser smoke memakai Web Audio nyata dengan oscillator sintetis. Backend final dijalankan pada image tanpa jaringan dan tanpa mount secret. Ini membuktikan perilaku tertentu, bukan ketersediaan Gemini atau akurasi model.
 
-Sumber bukti utama: `assessment/evidence/README.md`, E09 dan E11 (review sebelum commit), termasuk `reload-frontend-green.txt`, `reload-backend-green.txt`, `reload-ui-browser.txt`, serta manifest source. E01-E05 menyimpan snapshot lebih awal, E06 seeded fault, E07 ekspor, dan E08 rangkaian manual. E10 berisi lima screenshot live dari pengguna yang telah disanitasi. File mentah dipertahankan agar kegagalan tidak hilang dari narasi.
+Sumber bukti utama: `assessment/evidence/README.md`, E09/E11/E12/E13 (review sebelum commit), termasuk `reload-frontend-green.txt`, `reload-backend-green.txt`, `reload-ui-browser.txt`, serta manifest source. E01-E05 menyimpan snapshot lebih awal, E06 seeded fault, E07 ekspor, dan E08 rangkaian manual. E10 berisi lima screenshot live dari pengguna yang telah disanitasi. File mentah dipertahankan agar kegagalan tidak hilang dari narasi.
 
-Review 28 Oktober juga menemukan race End/reconnect yang membatalkan deadline acknowledgement. Satu regression test direproduksi gagal sebelum diperbaiki. E11 merekam suite terbaru 26/18, typecheck/build, dan ringkasan review di `assessment/commit-review.md`. E09 tetap snapshot historis 25/18.
+Review 28 Oktober juga menemukan race End/reconnect yang membatalkan deadline acknowledgement. Satu regression test direproduksi gagal sebelum diperbaiki. E11 merekam suite pada tahap review 26/18, typecheck/build, dan ringkasan review di `assessment/commit-review.md`. E09 tetap snapshot historis 25/18.
+
+### Scope tambahan: Retry hardware dan mobile
+
+Atas instruksi pengguna, Retry hardware kini membuat percobaan baru dengan cleanup timer, stream, AudioContext, dan animation frame. Akar masalahnya adalah effect OS yang hanya berjalan saat mount, sementara tombol lama hanya mereset state. Lima regression tests gagal sebelum perubahan dan lulus sesudahnya; suite menjadi 31. Threshold internet tetap sama. Rincian dan langkah uji ulang: `assessment/hardware-retry-fix.md`, E12.
+
+E13 memeriksa built UI precheck, interview aktif, portfolio, dan fit/gap pada 360/390/768/1280 px dengan teks panjang dan respons sintetis. Delapan dari 16 skenario sebelumnya overflow; setelah wrapping/container dan region scroll tabel diperbaiki, 16/16 lulus. Tombol Mic/End, Retry/Start, serta ekspor JSON sintetis dijalankan. Kolom Required F10 tetap belum diperbaiki. Rincian, screenshot before/after, dan batas uji: `assessment/mobile-check.md`.
+
+Autoplay override dipakai khusus layout; scroll tabel dilakukan secara programatik. Hasil ini belum membuktikan autoplay/izin, gesture touch, Safari/iOS, atau perangkat fisik. Tidak ada API/Gemini/mikrofon pengguna yang dipakai. Perbaikan Retry dan mobile dipisahkan dalam commit yang berbeda.
 
 ### Seeded fault dengan history terlihat
 
@@ -191,7 +200,7 @@ History tidak di-reset. Snapshot ini membuktikan tes menangkap kontrak tersebut 
 | --- | --- |
 | Percakapan singkat | Beberapa pasangan kandidat-AI dan transkrip berhasil |
 | Izin mic Block | Failed dan Start nonaktif; setelah Allow + reload menjadi Passed/aktif |
-| Tombol Retry hardware | Tetap macet OS/browser; F02 terbuka |
+| Tombol Retry hardware | Baseline gagal; kini E12 regression dan E13 built-UI fixture lulus tanpa reload, izin perangkat nyata belum diuji ulang |
 | Force reconnect | Reconnecting -> Connected dan AI kembali menjawab pada satu simulasi |
 | Reload/resume | Baseline sempat ended/error; setelah patch sesi 23 akhirnya dapat dilanjutkan, tetapi sempat macet dan melibatkan reconnect/mute |
 | Portfolio sesi 18 | Complete, tiga skill; hasil ditampilkan pengguna dan metadata dibaca read-only |
@@ -210,9 +219,9 @@ AI juga sempat merekomendasikan model lama tanpa memeriksa lifecycle penghentian
 
 ### Keputusan rilis dan pekerjaan berikutnya
 
-Belum merekomendasikan rilis untuk keputusan hiring. Prioritas berikutnya adalah representasi unassessed yang konsisten dari portfolio sampai fit/gap (F09/F11), verifikasi recovery tanpa intervensi, dan pengamanan data/log. F02, F10 dan F12 tetap backlog yang terukur. Perbaikan outcome kandidat telah dilakukan, tetapi tidak menutup seluruh lifecycle assessor atau semua model error.
+Belum merekomendasikan rilis untuk keputusan hiring. Prioritas berikutnya adalah representasi unassessed yang konsisten dari portfolio sampai fit/gap (F09/F11), verifikasi recovery tanpa intervensi, dan pengamanan data/log. F02 diperbaiki pada scope tambahan E12; F10 dan F12 tetap backlog yang terukur. Perbaikan outcome kandidat telah dilakukan, tetapi tidak menutup seluruh lifecycle assessor atau semua model error.
 
-Endurance 45 menit, seluruh jaringan/browser, concurrent tabs/jobs, partial writes, pengujian authorization, full mobile interview/portfolio/fit-gap, dan layout PDF pada long text belum diverifikasi memadai. Screenshot 390 px pada halaman error bukan pengganti tes semua halaman mobile atau ponsel nyata.
+Endurance 45 menit, seluruh jaringan/browser, concurrent tabs/jobs, partial writes, pengujian authorization, seluruh halaman mobile/perangkat fisik, dan layout PDF ekspor pada long text belum diverifikasi memadai. E13 memperluas pemeriksaan ke empat layar pada empat viewport Edge, tetapi bukan pengganti ponsel nyata atau semua browser.
 
 ## Step 6 - Kelengkapan pengumpulan
 

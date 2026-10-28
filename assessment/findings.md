@@ -24,7 +24,8 @@ Prioritas berikut menjadi acuan submission saat ini dan dapat berubah bila ada b
 | ID | Temuan | Kategori | Prioritas submission | Status |
 | --- | --- | --- | --- | --- |
 | F01 | Kandidat melihat keberhasilan ketika sesi gagal | Bug implementasi | P1 | Outcome API/UI diperbaiki dan tes lulus; live setelah patch pending |
-| F02 | Retry hardware berhenti di pemeriksaan OS | Bug implementasi | P2 | Source diperbaiki E12; 5 regression tests dan suite 31 lulus; perangkat nyata belum diverifikasi ulang |
+| F13 | Layout mobile/teks panjang membuat kontrol keluar viewport | Bug layout | P2 | Diperbaiki E13; 16/16 fixture viewport lulus, ponsel fisik belum diuji |
+| F02 | Retry hardware berhenti di pemeriksaan OS | Bug implementasi | P2 | Source diperbaiki E12; 5 regression tests/suite 31 lulus; Retry juga lulus built-UI fixture E13; perangkat nyata belum diverifikasi ulang |
 | F03 | Status sesi dan kesiapan portfolio kurang jelas bagi assessor | Gap presentasi fullstack | P2 | Teramati; kontrak status perlu diperjelas |
 | F04 | Portfolio gagal pada panggilan Gemini | Kendala konfigurasi/integrasi | P1 saat terjadi | Dipulihkan pada sesi 18; error lifecycle menyeluruh belum selesai |
 | F05 | Internet check memblokir tanpa penjelasan ambang/pemulihan | Gap UX dan pengukuran | P2 | Teramati; validitas metode belum diputuskan |
@@ -244,3 +245,9 @@ Portfolio sesi 18 memberi Communication L1/LOW dan menyimpulkan kandidat berpind
 - [PRD 01: AI Interview Behavior](https://github.com/rakamindev/ai-interview-platform/wiki/PRD-01-%E2%80%94-First-Principles:-AI-Interview-Behavior)
 - [PRD 02: End-to-End Interview](https://github.com/rakamindev/ai-interview-platform/wiki/PRD-02-%E2%80%94-Real-Simulation:-End%E2%80%90to%E2%80%90End-Interview)
 - Brief Fullstack Product Engineer yang diberikan pengguna, bagian Steps 2-5 dan minimum baseline standards.
+
+## F13 - Overflow layout pada viewport kecil dan teks panjang
+
+**Prioritas:** P2. **Kategori:** bug layout/presentasi. Delapan dari 16 skenario fixture sebelum perbaikan mengalami overflow; pada interview 360 px dokumen menjadi 576 px sehingga Mic/End berada di luar layar. Portfolio 360 px melebar ke 1055 px akibat header dan teks tanpa spasi. Ini diperiksa pada UI build nyata, bukan hanya inspeksi class.
+
+**Perbaikan:** wrapping/min-width pada header/container/teks dan aksi; tabel memiliki region scroll sendiri. Sesudah: 16/16 lulus pada 360/390/768/1280 px. F10 tentang nilai Required tetap terbuka. Tidak menganggap emulasi viewport sebagai uji semua ponsel. Bukti dan batas: [mobile-check.md](mobile-check.md), E13.

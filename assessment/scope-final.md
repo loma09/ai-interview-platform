@@ -28,7 +28,7 @@ Pembuktian alur sampai ekspor termasuk pengujian, bukan klaim bahwa engine penil
 
 - Mengubah kontrak rating untuk skill belum dinilai, confidence, prompt penilaian, atau engine fit/gap (F09/F11, O01-O03).
 - Merombak kesiapan portfolio dan lifecycle di seluruh layar assessor (F03). Outcome kandidat F01 kini masuk scope tambahan atas instruksi pengguna setelah M03 gagal; lihat reload-resume-fix.md.
-- Memperbaiki hardware Retry/threshold internet (F02/F05).
+- Mengubah threshold/metode internet (F05). Retry F02 dan perbaikan layout kini masuk scope tambahan E12/E13 atas instruksi pengguna.
 - Memperbaiki kolom Required fit/gap atau membersihkan generation_error setelah sukses (F10/F12).
 - Melakukan audit keamanan/legal lengkap, memperbaiki seluruh diagnostik token, atau menyatakan kepatuhan UU PDP (F08).
 - Mengganti provider/transport audio, menambah speech recognition sendiri, atau mengubah schema data tanpa kebutuhan slice yang terbukti.
@@ -62,8 +62,8 @@ Status **lulus otomatis** berarti perilaku spesifik lulus dalam harness yang dic
 | --- | --- | --- |
 | V01 | Live reconnect setelah gangguan jaringan, timing antargiliran kompleks, dan pengulangan lintassesi | Sebagian: M02b Force reconnect sempat pulih dan AI merespons; M03 baseline reload/resume gagal; sesi 23 akhirnya dilanjutkan terbatas setelah reconnect/mute/membuka ulang, bukan prosedur reload terisolasi; jaringan nyata tetap belum konklusif |
 | V02 | Sesi 45 menit dan koneksi buruk | Belum; jangan menyebut endurance lulus |
-| V03 | Mobile, long text, dan pemeriksaan visual semua halaman PDF | Belum; siapkan evidence UI sesuai brief |
-| V04 | Timeout/model close pada semua jalur UI, error/success lifecycle (F01) | F01 source/test diperbaiki pada E09; live setelah patch pending. Precheck mic Allow + reload lulus; Retry tetap F02. Seluruh failure UX belum dinyatakan lulus |
+| V03 | Mobile, long text, dan pemeriksaan visual semua halaman PDF | Sebagian: E13 16 skenario viewport Edge lulus setelah 8 gagal; Safari/ponsel fisik/semua halaman dan PDF export long text belum |
+| V04 | Timeout/model close pada semua jalur UI, error/success lifecycle (F01) | F01 source/test diperbaiki pada E09; live setelah patch pending. Precheck mic Allow + reload lulus; Retry source/regression E12 dan browser fixture E13 lulus; izin perangkat nyata belum diuji ulang. Seluruh failure UX belum dinyatakan lulus |
 | V05 | Concurrency/duplicate jobs, partial writes, otorisasi dan tenant untuk seluruh endpoint | Belum; tidak dinyatakan aman oleh suite audio |
 | V06 | Unassessed rating dan gap (F09/F11), Required kosong (F10), error aktif tersisa (F12) | Temuan terbuka; tidak masuk klaim perbaikan |
 | V07 | Riset domain, UU PDP, redaksi artefak, PR, video, dan publication history | Desk research domain/UU PDP dan draf PDF telah tersedia pada report-draft.md; lima screenshot live telah disanitasi (E10); PR #214 dan history telah dipublikasikan; video belum tersedia |
@@ -82,7 +82,7 @@ Severity menyatakan dampak jika kejadian terjadi; status/urutan tindak lanjut me
 | F09 + F11 | P1 | Tidak ada evidence ditafsirkan sebagai level rendah lalu gap terhadap vacancy | Backlog produk pertama; satu rantai masalah, jangan dihitung sebagai dua akar independen |
 | F01 | P1 | Error teknis ditampilkan kepada kandidat sebagai sukses | Scope tambahan diimplementasikan; tes outcome/ack lulus E09, uji live pending |
 | F08 | P2, cakupan terbatas | Token invite terlihat di log development | Investigasi keamanan segera sebelum log dipublikasikan/produk dirilis; dapat naik jika paparan/cakupan akses terbukti lebih luas |
-| F02 | P2 | Tombol Retry hardware macet tetapi reload menjadi workaround lokal | Backlog berikutnya; prioritas diturunkan dari P1 setelah membedakan retry rusak dari seluruh akses yang selalu terblokir |
+| F02 | P2 | Tombol Retry hardware macet tetapi reload menjadi workaround lokal | Diperbaiki E12; 5 tes regression/31 suite dan built-UI fixture E13 lulus; pengujian perangkat nyata tetap terbatas |
 | F10 | P2 | Assessor tidak melihat target untuk memeriksa delta | Koreksi kontrak expected_level/required_level pada pekerjaan lanjutan; nilai tersedia di ekspor |
 | F12 | P2 | Status complete masih membawa error lama | Pekerjaan lanjutan untuk error aktif/riwayat attempt dan race job |
 | F03 | P2 | Sesi berakhir disamakan dengan kesiapan hasil pada daftar | Ikuti pekerjaan lifecycle F01/F12 agar kontrak tidak terpecah |
@@ -115,3 +115,9 @@ Review dua sumbu menemukan race pada manual End: reconnect membatalkan deadline 
 ## Publikasi - 28 Oktober 2026
 
 [PR fullstack #214](https://github.com/rakamindev/ai-interview-platform/pull/214) terbuka ke rakamindev/main. [Branch aplikasi](https://github.com/loma09/ai-interview-platform/tree/loma/project-setup) dan [scratch seeded fault](https://github.com/loma09/ai-interview-platform/tree/loma/seeded-fault-resume) telah dipush tanpa force push. Video belum tersedia.
+
+## Scope tambahan Retry dan mobile - 28 Oktober 2026
+
+- AC15: Retry mengulang checklist tanpa reload dan membersihkan resource/hasil async lama. E12: 5 merah -> 5 hijau, suite31. E13 juga menjalankan mic-denial -> Retry -> Start pada built UI dengan perangkat sintetis.
+- AC16: Precheck/interview/portfolio/fit-gap pada 360/390/768/1280 px tidak memperlebar dokumen; kontrol utama terlihat dan tabel dapat discroll. E13: 8/16 gagal sebelum -> 16/16 lulus sesudah.
+- Commit Retry terpisah dari commit mobile; batas perangkat nyata, F05 dan F10 tetap terbuka. Lihat hardware-retry-fix.md dan mobile-check.md.

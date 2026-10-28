@@ -46,3 +46,5 @@ Ini belum mengonfirmasi semua perangkat/izin browser nyata. Uji browser dengan f
 5. Jika internet gagal sungguhan, Retry tetap boleh gagal di Internet. Jangan menganggapnya bug hanya karena pemeriksaan tidak lolos.
 
 Untuk presentasi: "Sebelumnya tombol mereset tampilan tetapi tidak menjalankan effect OS lagi. Sekarang Retry membuat percobaan baru dengan lifecycle sendiri, dan resource percobaan lama dibersihkan. Saya membuktikan jalur gagal-ke-lulus lewat tes sebelum dan sesudah, tanpa mengubah batas kelulusan."
+
+Update browser E13: pada keempat viewport, built UI melewati Microphone Failed -> Retry -> Passed/Start aktif tanpa reload dengan media sintetis. Pengujian perangkat nyata tetap belum diklaim.

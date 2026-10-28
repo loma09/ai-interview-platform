@@ -322,7 +322,7 @@ export default function InterviewPage() {
   const candidateSpeaking = speaker === "candidate";
 
   return (
-    <div className="max-w-xl mx-auto px-4 flex flex-col h-full">
+    <div className="w-full min-w-0 max-w-xl mx-auto px-4 flex flex-col h-full">
       {/* Top bar */}
       <div className="flex items-center justify-between py-3 border-b sticky top-12 bg-white z-10">
         <span className="text-sm font-medium">AI Interview</span>
@@ -396,13 +396,14 @@ export default function InterviewPage() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t py-3 flex items-center justify-between gap-4 sticky bottom-0 bg-white">
+      <div className="border-t py-3 flex flex-wrap items-center justify-between gap-3 sticky bottom-0 bg-white">
         <ConnectionStatus state={wsConnectionStatus} />
 
-        <div className="flex items-center gap-3">
+        <div className="ml-auto flex max-w-full flex-wrap items-center gap-2 sm:gap-3">
           <Button
             variant={micMuted ? "destructive" : "outline"}
             size="sm"
+            className="min-h-11 sm:min-h-8"
             onClick={toggleMic}
           >
             {micMuted ? (
@@ -414,7 +415,7 @@ export default function InterviewPage() {
 
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="outline" size="sm">End Interview</Button>
+            <Button variant="outline" size="sm" className="min-h-11 sm:min-h-8">End Interview</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>

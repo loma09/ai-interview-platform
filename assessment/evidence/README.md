@@ -1,6 +1,6 @@
 # Indeks evidence untuk laporan
 
-Pemeriksaan terakhir: 28 Oktober 2026. Hasil paling baru adalah E11: 26 tes frontend dan 18 contoh backend lulus saat review sebelum commit. E09 tetap snapshot 25/18 setelah patch reload/outcome. E01-E05 tetap snapshot sebelum patch; tidak diubah untuk memalsukan riwayat. File `audio-*-red/green.txt` merekam tahap investigasi yang berbeda dan tidak boleh dijumlahkan sebagai jumlah tes unik.
+Pemeriksaan terakhir: 28 Oktober 2026. Hasil frontend paling baru E12/E13: 31 unit tests dan 16 skenario viewport Edge lulus. Backend terakhir E11: 18 contoh lulus; tidak diubah oleh slice Retry/mobile. E09 tetap snapshot 25/18 setelah patch reload/outcome. E01-E05 tetap snapshot sebelum patch; tidak diubah untuk memalsukan riwayat. File `audio-*-red/green.txt` merekam tahap investigasi yang berbeda dan tidak boleh dijumlahkan sebagai jumlah tes unik.
 
 ## Bukti final yang diprioritaskan
 
@@ -101,3 +101,8 @@ E01-E10 tidak diubah jumlah tesnya. Tidak ada pengujian live Gemini baru pada re
 ## E12 - Retry hardware (28 Oktober 2026)
 
 [Penjelasan dan cara uji](../hardware-retry-fix.md). [Red 5 gagal](hardware-retry-red.txt), [green 5 lulus](hardware-retry-green.txt), [suite 31 lulus](hardware-full-green.txt), [typecheck/build](hardware-build.txt). Perangkat dan jaringan pada unit tests sintetis; threshold tetap.
+
+
+## E13 - Mobile dan teks panjang (28 Oktober 2026)
+
+[Penjelasan dan cara uji](../mobile-check.md). [Before](mobile-before/results.json): 8 dari 16 gagal layout; [after](mobile-after/results.json): 16/16 lulus, [suite31](mobile-unit-green.txt), [build](mobile-build.txt). Empat layar x 360/390/768/1280 px. PNG di mobile-before/ dan mobile-after/ memakai data sintetis. Autoplay override dan scroll programatik membuat hasil ini tidak membuktikan izin, gesture, atau performa ponsel fisik.
