@@ -44,7 +44,7 @@ Setiap baris adalah pengujian pada scope/tahap berbeda. Jangan mengatakan satu b
 - Pengguna mengonfirmasi percakapan beberapa giliran dan portfolio tampil. Ini evidence live berbasis observasi pengguna; belum ada video terarsip yang dapat direview independen.
 - Pemeriksaan metadata PostgreSQL sebelumnya menunjukkan sesi 18 complete dengan 3 skill. Query tersebut read-only; tidak mengambil isi transkrip. Ringkasan itu bukan file export database.
 - Sesi 45 menit, ketahanan jaringan/reconnect live, browser lain, concurrency/duplicate jobs, dan UI mobile belum lulus hanya karena tes otomatis di sini lulus. Fit/gap dan ekspor kini memiliki verifikasi manual terpisah E07; edge cases serta QA layout menyeluruh masih terbuka.
-- R01-R07 adalah fail-before-fix historis. Eksperimen seeded fault terpisah kini tersedia sebagai E06 pada branch lokal loma/seeded-fault-resume; publikasi history ke GitHub masih diperlukan.
+- R01-R07 adalah fail-before-fix historis. Eksperimen seeded fault terpisah kini tersedia sebagai E06 pada branch lokal loma/seeded-fault-resume; [history di GitHub](https://github.com/loma09/ai-interview-platform/tree/loma/seeded-fault-resume) kini tersedia.
 - Screenshot terminal opsional. Di PDF, tampilkan ringkasan evidence dan tautan repo/PR yang tepat setelah PR tersedia. Screenshot UI tetap perlu disiapkan terpisah.
 
 ## Cara menjalankan kembali
@@ -72,10 +72,10 @@ File evidence teks diperiksa untuk pola umum API key, JWT, private key, token in
 
 Isi mentah dipertahankan; kode warna ANSI dibersihkan bila ada. Tidak ada log request Gemini lengkap, rekaman mikrofon asli, key, atau konfigurasi runtime yang ditambahkan pada run final ini.
 
-## Artefak yang masih kosong
+## Status artefak pengumpulan
 
-- Link PR dan commit yang memuat source final.
-- Publikasi branch/commit seeded fault E06 ke GitHub beserta link yang dapat dibuka reviewer.
+- [PR #214](https://github.com/rakamindev/ai-interview-platform/pull/214) dan branch source sudah tersedia; video masih perlu dilengkapi.
+- [Branch/commit seeded fault E06](https://github.com/loma09/ai-interview-platform/tree/loma/seeded-fault-resume) sudah dipublikasikan; ketiga commit tercantum pada PR.
 - Video demo live; lima screenshot yang sudah disanitasi tersedia pada E10.
 - Bukti failure paths/rilis yang belum tercakup, sesuai scope akhir.
 

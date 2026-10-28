@@ -8,7 +8,7 @@
 Repository asal: [rakamindev/ai-interview-platform](https://github.com/rakamindev/ai-interview-platform)  
 Fork: [loma09/ai-interview-platform](https://github.com/loma09/ai-interview-platform)
 
-**Status pengumpulan:** isi laporan telah dikonsolidasikan. Open PR, publikasi history seeded fault, dan video 3-5 menit belum tersedia. Lima screenshot live yang sudah disanitasi disertakan sebagai E10; screenshot recovery dan portfolio sukses belum tersedia. Dokumen ini belum dinyatakan siap diunggah sebagai submission final.
+**Status pengumpulan:** [PR #214](https://github.com/rakamindev/ai-interview-platform/pull/214) sudah terbuka ke repository asal; branch aplikasi dan history seeded fault telah dipublikasikan. Lima screenshot live yang sudah disanitasi disertakan sebagai E10. Video demo 3-5 menit belum tersedia; screenshot recovery dan portfolio sukses belum tersedia. PDF ini tetap versi review hingga paket pengumpulan lengkap.
 
 ## Ringkasan
 
@@ -24,7 +24,7 @@ Verifikasi terakhir yang diarsipkan menghasilkan **26 tes frontend lulus dan 18 
 
 ### Menjalankan baseline
 
-Repository memuat `api/` untuk Rails/PostgreSQL/Sidekiq dan `web/` untuk React/TypeScript/Vite. Pengerjaan berada pada branch `loma/project-setup`; perubahan produk belum dikemas sebagai open PR.
+Repository memuat `api/` untuk Rails/PostgreSQL/Sidekiq dan `web/` untuk React/TypeScript/Vite. Pengerjaan berada pada branch `loma/project-setup`; perubahan produk tersedia pada [PR #214](https://github.com/rakamindev/ai-interview-platform/pull/214).
 
 | Komponen | Lingkungan yang digunakan |
 | --- | --- |
@@ -183,7 +183,7 @@ Eksperimen dilakukan pada scratch branch `loma/seeded-fault-resume`, terpisah da
 | c533d0d | Sinyal kandidat sengaja dihapus | 8 contoh, tepat 1 gagal |
 | 722cec0 | Fault direvert | 8 contoh, 0 gagal |
 
-History tidak di-reset. Snapshot ini membuktikan tes menangkap kontrak tersebut pada tahap eksperimen; bukan seluruh lifecycle sesudah perluasan scope. History masih lokal dan harus dipublikasikan agar reviewer eksternal dapat memeriksa commit. Panduan penjelasan ada di `assessment/seeded-fault.md`.
+History tidak di-reset. Snapshot ini membuktikan tes menangkap kontrak tersebut pada tahap eksperimen; bukan seluruh lifecycle sesudah perluasan scope. History sudah dipublikasikan pada [scratch branch](https://github.com/loma09/ai-interview-platform/tree/loma/seeded-fault-resume); ketiga commit dapat diperiksa reviewer melalui tautan pada PR #214. Panduan penjelasan ada di `assessment/seeded-fault.md`.
 
 ### Hasil live: berhasil dan yang masih terbatas
 
@@ -219,15 +219,15 @@ Endurance 45 menit, seluruh jaringan/browser, concurrent tabs/jobs, partial writ
 | Artefak | Status |
 | --- | --- |
 | Narasi Steps 1-5, konteks domain dan implikasi PDP | Terisi pada laporan ini; riset pengguna langsung/legal review belum dilakukan |
-| Source fullstack dan regression evidence | Direview dan di-commit lokal; PR belum tersedia |
-| Seeded fault dan AI verification moment | Terdokumentasi; history seeded fault belum dipush |
+| Source fullstack dan regression evidence | Direview, di-commit, dan dipublikasikan pada [PR #214](https://github.com/rakamindev/ai-interview-platform/pull/214) |
+| Seeded fault dan AI verification moment | Terdokumentasi; [history seeded fault](https://github.com/loma09/ai-interview-platform/tree/loma/seeded-fault-resume) telah dipush |
 | Screenshot error/responsive sintetis | Ada pada E09 dan lampiran; label sintetis dipertahankan |
 | Screenshot live yang dikirim selama eksplorasi | Lima gambar telah disanitasi dan dilampirkan sebagai E10; belum ada pasangan before/after recovery yang lengkap |
-| Open PR ke repository asal | BELUM TERSEDIA - masukkan URL setelah PR benar-benar dibuat |
+| Open PR ke repository asal | [PR #214 - fullstack audio dan outcome](https://github.com/rakamindev/ai-interview-platform/pull/214) |
 | Video demo 3-5 menit | BELUM TERSEDIA - rekam dan masukkan URL |
-| PDF submission | Versi review tersedia; finalisasi setelah link PR/video dan pemeriksaan akhir dilengkapi |
+| PDF submission | Versi review tersedia; finalisasi setelah video dan pemeriksaan akhir dilengkapi |
 
-Saya tidak mengklaim PR, video, atau tes yang belum dilakukan sebagai selesai. Sebelum upload, periksa diff/staged files untuk secret dan data pribadi, publikasikan branch yang diperlukan, verifikasi tautan reviewer, lalu periksa PDF final. Tidak perlu memperbaiki seluruh backlog agar laporan ini jujur tentang scope yang dikerjakan.
+PR dan history seeded fault telah dipublikasikan setelah pemeriksaan kandidat commit untuk secret. Video serta tes yang belum dilakukan tetap ditandai belum selesai. Sebelum upload, lengkapi tautan video, verifikasi akses reviewer, lalu periksa PDF final. Tidak perlu memperbaiki seluruh backlog agar laporan ini jujur tentang scope yang dikerjakan.
 
 ## Lampiran - Screenshot live pengujian lokal
 
