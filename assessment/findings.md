@@ -24,7 +24,7 @@ Prioritas berikut menjadi acuan submission saat ini dan dapat berubah bila ada b
 | ID | Temuan | Kategori | Prioritas submission | Status |
 | --- | --- | --- | --- | --- |
 | F01 | Kandidat melihat keberhasilan ketika sesi gagal | Bug implementasi | P1 | Outcome API/UI diperbaiki dan tes lulus; live setelah patch pending |
-| F02 | Retry hardware berhenti di pemeriksaan OS | Bug implementasi | P2 | Belum diperbaiki; reload menjadi workaround lokal |
+| F02 | Retry hardware berhenti di pemeriksaan OS | Bug implementasi | P2 | Source diperbaiki E12; 5 regression tests dan suite 31 lulus; perangkat nyata belum diverifikasi ulang |
 | F03 | Status sesi dan kesiapan portfolio kurang jelas bagi assessor | Gap presentasi fullstack | P2 | Teramati; kontrak status perlu diperjelas |
 | F04 | Portfolio gagal pada panggilan Gemini | Kendala konfigurasi/integrasi | P1 saat terjadi | Dipulihkan pada sesi 18; error lifecycle menyeluruh belum selesai |
 | F05 | Internet check memblokir tanpa penjelasan ambang/pemulihan | Gap UX dan pengukuran | P2 | Teramati; validitas metode belum diputuskan |
@@ -72,6 +72,8 @@ Prioritas berikut menjadi acuan submission saat ini dan dapat berubah bila ada b
 **Workaround:** reload halaman. Ini tidak memperbaiki bug Retry dan tidak menjamin tes jaringan lulus.
 
 **Uji ulang error/recovery:** saat menguji izin mikrofon Block, OS/browser baru tertahan setelah Retry; recovery tombol gagal sesuai F02. Setelah reload tanpa Retry, pengguna melihat Microphone Failed/Start nonaktif. Allow + reload menghasilkan Passed/Start aktif. Penolakan dan workaround reload lulus terbatas, tetapi bug Retry tetap terbuka. Lihat evidence/manual-recovery-mobile.md. Tidak ada perbaikan kode pada tahap pencatatan ini.
+
+**Update 28 Oktober:** perbaikan E12 membuat setiap Retry memulai percobaan baru dan membersihkan timer/stream/context. Lima tes gagal sebelum perubahan, lalu lima lulus; suite 31 lulus. Riwayat reproduksi di atas tetap dipertahankan. Lihat [hardware-retry-fix.md](hardware-retry-fix.md); tidak mengubah threshold internet.
 
 ## F03 - Status sesi dan portfolio kurang jelas bagi assessor
 

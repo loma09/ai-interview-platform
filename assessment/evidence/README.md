@@ -96,3 +96,8 @@ Lima screenshot lama yang sudah disanitasi beserta konteks dan batas bukti: [liv
 - [Review dan batas pemeriksaan secret](../commit-review.md).
 
 E01-E10 tidak diubah jumlah tesnya. Tidak ada pengujian live Gemini baru pada review ini.
+
+
+## E12 - Retry hardware (28 Oktober 2026)
+
+[Penjelasan dan cara uji](../hardware-retry-fix.md). [Red 5 gagal](hardware-retry-red.txt), [green 5 lulus](hardware-retry-green.txt), [suite 31 lulus](hardware-full-green.txt), [typecheck/build](hardware-build.txt). Perangkat dan jaringan pada unit tests sintetis; threshold tetap.
