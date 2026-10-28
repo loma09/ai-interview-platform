@@ -54,7 +54,7 @@ Status **lulus otomatis** berarti perilaku spesifik lulus dalam harness yang dic
 | AC11 | REST model preview membangun URL v1beta; respons JSON sintetis tetap diproses | Lulus otomatis | E02/R07; akses model/kuota bukan bagian tes offline |
 | AC12 | Kandidat melakukan minimal tiga pasangan jawaban-respons nyata dan mengakhiri sesi | Lulus terbatas | Transkrip dan konfirmasi pengguna; video belum dikemas, endurance belum |
 | AC13 | Setelah pemulihan integrasi, portfolio sesi uji tersedia; fit/gap dapat dibuka dan PDF/JSON menyertakan portfolio serta laporan vacancy yang sama | Lulus terbatas untuk availability/isi | Sesi 18/portfolio 18/vacancy 1, E07; belum menyatakan rating/metadata benar |
-| AC14 | Perilaku inti resume yang sengaja dihilangkan ditangkap tes tanpa mengubah assertion, lalu dipulihkan | Lulus lokal | E06: 8/0 -> 8/1 -> 8/0; history belum dipush |
+| AC14 | Perilaku inti resume yang sengaja dihilangkan ditangkap tes tanpa mengubah assertion, lalu dipulihkan | Lulus lokal | E06: 8/0 -> 8/1 -> 8/0; history telah dipush, lihat PR #214 |
 
 ### Batas yang tetap terbuka
 
@@ -66,7 +66,7 @@ Status **lulus otomatis** berarti perilaku spesifik lulus dalam harness yang dic
 | V04 | Timeout/model close pada semua jalur UI, error/success lifecycle (F01) | F01 source/test diperbaiki pada E09; live setelah patch pending. Precheck mic Allow + reload lulus; Retry tetap F02. Seluruh failure UX belum dinyatakan lulus |
 | V05 | Concurrency/duplicate jobs, partial writes, otorisasi dan tenant untuk seluruh endpoint | Belum; tidak dinyatakan aman oleh suite audio |
 | V06 | Unassessed rating dan gap (F09/F11), Required kosong (F10), error aktif tersisa (F12) | Temuan terbuka; tidak masuk klaim perbaikan |
-| V07 | Riset domain, UU PDP, redaksi artefak, PR, video, dan publication history | Desk research domain/UU PDP dan draf PDF telah tersedia pada report-draft.md; lima screenshot live telah disanitasi (E10); PR, video, dan publikasi history belum lengkap |
+| V07 | Riset domain, UU PDP, redaksi artefak, PR, video, dan publication history | Desk research domain/UU PDP dan draf PDF telah tersedia pada report-draft.md; lima screenshot live telah disanitasi (E10); PR #214 dan history telah dipublikasikan; video belum tersedia |
 
 Tidak ada ambang akurasi/latency buatan atau klaim statistik dari satu sesi. Acceptance criteria di atas ditautkan ke pengamatan/test yang ada; beberapa dirapikan setelah investigasi berlangsung, sehingga laporan tidak boleh membalik urutan proses tersebut.
 
@@ -93,7 +93,7 @@ Urutan bukan alasan membiarkan token nyata masuk PR. Redaksi data pada paket sub
 
 ## 6. Keputusan rilis dan arti selesai
 
-**Submission scope:** menyajikan perbaikan fullstack audio dengan tes deterministik, seeded fault, bukti live terbatas, dan batas yang eksplisit. Implementasi inti dan evidence tersedia secara lokal; paket belum final karena publikasi PR/history, dan video masih terbuka. Lima screenshot live telah disanitasi sebagai E10; screenshot recovery pascaperbaikan belum tersedia. Desk research domain/UU PDP serta PDF review telah disusun; PDF final menunggu kelengkapan tersebut.
+**Submission scope:** menyajikan perbaikan fullstack audio dengan tes deterministik, seeded fault, bukti live terbatas, dan batas yang eksplisit. Implementasi inti dan evidence tersedia secara lokal; PR #214 dan history seeded fault telah dipublikasikan; paket belum final karena video belum tersedia. Lima screenshot live telah disanitasi sebagai E10; screenshot recovery pascaperbaikan belum tersedia. Desk research domain/UU PDP serta PDF review telah disusun; PDF final menunggu kelengkapan tersebut.
 
 **Rilis ke client untuk keputusan hiring:** belum dapat direkomendasikan dari bukti ini. F09/F11 masih memengaruhi interpretasi hasil dan F01 belum diverifikasi live setelah patch, sementara pengujian keamanan, endurance, dan failure UX belum lengkap. Ini keputusan berbasis temuan yang sudah terlihat, bukan klaim bahwa semua area pasti bermasalah.
 
@@ -111,3 +111,7 @@ Tidak mengubah kode produk atau menutup findings hanya dengan menulis dokumen in
 ## Review sebelum commit - 28 Oktober 2026
 
 Review dua sumbu menemukan race pada manual End: reconnect membatalkan deadline acknowledgement dan dapat mengembalikan UI active setelah perangkat dihentikan. Regression test direproduksi gagal, lalu perbaikan mempertahankan ending hingga outcome terminal atau timeout. E11 merekam tes 26 frontend/18 backend serta build yang diperiksa ulang. E09 tetap snapshot historis 25/18, bukan ditimpa.
+
+## Publikasi - 28 Oktober 2026
+
+[PR fullstack #214](https://github.com/rakamindev/ai-interview-platform/pull/214) terbuka ke rakamindev/main. [Branch aplikasi](https://github.com/loma09/ai-interview-platform/tree/loma/project-setup) dan [scratch seeded fault](https://github.com/loma09/ai-interview-platform/tree/loma/seeded-fault-resume) telah dipush tanpa force push. Video belum tersedia.

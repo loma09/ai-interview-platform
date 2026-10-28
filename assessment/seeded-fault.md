@@ -1,6 +1,6 @@
 # Seeded fault: mikrofon kandidat tidak dibuka saat resume
 
-Tanggal: 27 Oktober 2026. Status: eksperimen lokal selesai, fault dipulihkan. Branch dan commit belum dipush ke GitHub.
+Tanggal eksperimen: 27 Oktober 2026. Dipublikasikan 28 Oktober 2026: fault telah dipulihkan, [branch dan ketiga commit tersedia di GitHub](https://github.com/loma09/ai-interview-platform/tree/loma/seeded-fault-resume), ditautkan dari [PR fullstack #214](https://github.com/rakamindev/ai-interview-platform/pull/214).
 
 ## Tujuan dalam bahasa sederhana
 
@@ -32,7 +32,7 @@ Transport WebSocket dan session pada tes bersifat sintetis. Callback produksi ya
 
 ## Isolasi dan scope
 
-- Branch aplikasi tetap `loma/project-setup`; seluruh perubahan yang belum dicommit di checkout utama tetap dipertahankan.
+- Saat eksperimen dilakukan, branch aplikasi tetap `loma/project-setup` dan perubahan yang belum dicommit di checkout utama dipertahankan. Perubahan aplikasi kini telah dicommit dan dipublikasikan terpisah dari scratch branch.
 - Scratch branch `loma/seeded-fault-resume` berada dalam worktree terpisah. Direktori checkout aplikasi utama tidak dipindahkan ke commit rusak.
 - Baseline scratch berisi snapshot terpilih dari source backend dan tes yang sudah diverifikasi. Ini bukan commit seluruh perubahan frontend/backend untuk PR final.
 - Container uji bersifat sementara, memakai `--network none` serta bind mount source/spec read-only. Tidak ada database, file secret, atau runtime API/Sidekiq yang dimodifikasi oleh eksperimen ini.
