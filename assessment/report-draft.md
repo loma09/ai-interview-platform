@@ -2,13 +2,13 @@
 
 ## Laporan Studi Kasus Fullstack Product Engineer
 
-**Versi review - 28 Oktober 2026**  
+**Versi pengumpulan - 28 Oktober 2026**  
 **Fokus:** memperbaiki pengumpulan evidence melalui audio, resume sesi, dan kejujuran status akhir kandidat.
 
 Repository asal: [rakamindev/ai-interview-platform](https://github.com/rakamindev/ai-interview-platform)  
 Fork: [loma09/ai-interview-platform](https://github.com/loma09/ai-interview-platform)
 
-**Status pengumpulan:** [PR #214](https://github.com/rakamindev/ai-interview-platform/pull/214) sudah terbuka ke repository asal; branch aplikasi dan history seeded fault telah dipublikasikan. Lima screenshot live yang sudah disanitasi disertakan sebagai E10. Video demo 3-5 menit belum tersedia; screenshot recovery dan portfolio sukses belum tersedia. PDF ini tetap versi review hingga paket pengumpulan lengkap.
+**Status pengumpulan:** [PR #214](https://github.com/rakamindev/ai-interview-platform/pull/214), source, dan history seeded fault telah dipublikasikan. [Video demo - Case Study Rakamin: AI Interview Platform](https://youtu.be/rbecX2gef7c) tersedia dengan durasi 4 menit 45 detik; halaman dan metadata player dapat dibuka saat pemeriksaan. Lima screenshot live yang sudah disanitasi disertakan sebagai E10. Batas pengujian dan temuan terbuka tetap dinyatakan dalam laporan ini.
 
 ## Ringkasan
 
@@ -91,7 +91,7 @@ Saya memisahkan bug implementasi, konfigurasi/integrasi, gap produk, dan observa
 | --- | --- | --- | --- |
 | F07 | Audio/turn macet menghambat pengumpulan bukti | P1 | Source/test diperbaiki; hasil live terbatas, gejala intermiten masih dicatat |
 | F01 | Kegagalan teknis ditampilkan sebagai sukses | P1 | Kontrak outcome dan UI diperbaiki; verifikasi sintetis lulus |
-| F04 | Hasil tidak tersedia karena endpoint/model/kuota | P1 saat terjadi | Sesi 18 pulih; sesi baru berikutnya kembali tertahan limit provider |
+| F04 | Hasil tidak tersedia karena endpoint/model/kuota | P1 saat terjadi | Sesi 18 pulih; sesi 23/24 terkena limit; sesi 27 pernah ditolak karena model Live pada jalur REST |
 | F06 | Undangan membuka origin API yang salah | P1 saat terjadi | Konfigurasi lokal dipulihkan |
 | F09/F11 | Evidence kosong menjadi L1, lalu dihitung sebagai gap | P1 | Terbuka; satu rantai masalah, bukan dua akar independen |
 | F08 | Token invite terlihat pada log development | P2 terbatas | Terbuka; cakupan production belum diaudit |
@@ -206,6 +206,7 @@ History tidak di-reset. Snapshot ini membuktikan tes menangkap kontrak tersebut 
 | Portfolio sesi 18 | Complete, tiga skill; hasil ditampilkan pengguna dan metadata dibaca read-only |
 | Fit/gap dan ekspor sesi 18 | Tiga perbandingan; PDF dua halaman dan JSON berisi laporan vacancy yang sesuai |
 | Portfolio sesi 23/24 | Kembali gagal dengan RateLimitError; kuota provider diakui pengguna |
+| Portfolio sesi 25/26 dan 27 | Metadata read-only menunjukkan 25/26 complete. Pada 27, log menunjukkan HTTP 400 karena gemini-3.8-live dipanggil melalui generateContent; hasil retry setelah perubahan konfigurasi belum diverifikasi |
 
 Mode Offline DevTools dan Wi-Fi mati saat memakai localhost tidak menghasilkan bukti pemulihan jaringan yang konklusif. Resume sesi 23 tidak direkam sebagai satu prosedur reload tanpa intervensi. Transkrip baru pascarecovery, ketepatan konteks, dan sisa waktu belum dikonfirmasi terpisah. Sesi lama ended/error tidak dibuka ulang untuk membuat hasil tampak berhasil.
 
@@ -233,10 +234,10 @@ Endurance 45 menit, seluruh jaringan/browser, concurrent tabs/jobs, partial writ
 | Screenshot error/responsive sintetis | Ada pada E09 dan lampiran; label sintetis dipertahankan |
 | Screenshot live yang dikirim selama eksplorasi | Lima gambar telah disanitasi dan dilampirkan sebagai E10; belum ada pasangan before/after recovery yang lengkap |
 | Open PR ke repository asal | [PR #214 - fullstack audio dan outcome](https://github.com/rakamindev/ai-interview-platform/pull/214) |
-| Video demo 3-5 menit | BELUM TERSEDIA - rekam dan masukkan URL |
-| PDF submission | Versi review tersedia; finalisasi setelah video dan pemeriksaan akhir dilengkapi |
+| Video demo 3-5 menit | [YouTube - 4 menit 45 detik](https://youtu.be/rbecX2gef7c); halaman/player dapat dibuka saat pemeriksaan |
+| PDF submission | Dokumen pengumpulan ini memuat link PR, video, narasi, dan screenshot; upload ke portal dilakukan oleh kandidat |
 
-PR dan history seeded fault telah dipublikasikan setelah pemeriksaan kandidat commit untuk secret. Video serta tes yang belum dilakukan tetap ditandai belum selesai. Sebelum upload, lengkapi tautan video, verifikasi akses reviewer, lalu periksa PDF final. Tidak perlu memperbaiki seluruh backlog agar laporan ini jujur tentang scope yang dikerjakan.
+PR dan history seeded fault telah dipublikasikan setelah pemeriksaan kandidat commit untuk secret. Link video sudah dicantumkan dan durasinya sesuai brief. Pemeriksaan akses halaman/player tidak sama dengan audit seluruh isi rekaman atau konfirmasi pengaturan Unlisted. Tes yang belum dilakukan dan findings yang belum diperbaiki tetap dinyatakan terbuka. Dokumen ini tidak menyatakan upload ke portal telah dilakukan.
 
 ## Lampiran - Screenshot live pengujian lokal
 
@@ -264,11 +265,9 @@ Lima screenshot berikut sudah dikirim pengguna selama pengujian. Area aplikasi d
 
 ## Lampiran - Bukti visual sintetis
 
-Screenshot berikut diambil dari UI hasil build, dengan respons HTTP sintetis dan tanpa data kandidat nyata. Ini mendukung verifikasi tampilan outcome, bukan bukti percakapan Gemini langsung.
+Screenshot berikut diambil dari UI hasil build pada viewport 390 px, dengan respons HTTP/WebSocket dan audio sintetis. Teks panjang membungkus di dalam layar; kontrol Mic dan End tetap terlihat. Ini bukti layout E13, bukan percakapan Gemini langsung atau pengujian ponsel fisik. Bukti tampilan error terpisah tersedia pada E09 di repository.
 
-![Error teknis pada viewport desktop. Complete tidak ditampilkan untuk ended/error.](evidence/reload-ui/failed-1280.png)
-
-![Interview interrupted pada viewport 390 px. Tidak ada overflow horizontal pada skenario ini.](evidence/reload-ui/failed-390.png)
+![Interview aktif pada viewport 390 px dengan teks panjang dan data sintetis. Tidak ada overflow dokumen pada skenario E13; browser Edge, autoplay override, dan perangkat sintetis digunakan.](evidence/mobile-after/interview-390.png)
 
 ## Sumber
 
